@@ -1,4 +1,5 @@
-import { put, call, cancelled, takeEvery, takeLatest, select} from 'redux-saga/effects';
+import { all, takeEvery, takeLatest } from 'redux-saga/effects';
+// , put, call, cancelled, takeEvery, takeLatest, select
 
 const crudFetch = (restClient) => {
     function* handleFetch(action) {
@@ -44,10 +45,10 @@ const crudFetch = (restClient) => {
     }
 
     return function* watchCrudFetch() {
-        yield [
+        yield all([
             takeLatest(action => action.meta && action.meta.fetch && action.meta.cancelPrevious, handleFetch),
             takeEvery(action => action.meta && action.meta.fetch && !action.meta.cancelPrevious, handleFetch),
-        ];
+        ]);
     };
 };
 
