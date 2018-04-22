@@ -6,7 +6,7 @@ import { reducer as formReducer } from 'redux-form';
 export default combineReducers({
   routing: routerReducer,
   form: formReducer,
-  // loading: loadingReducer,
+  search: require('./AirportRedux').reducer,
   // saving: savingRedux,
   // waiting: waitingReducer,
   // alert: alertReducer,

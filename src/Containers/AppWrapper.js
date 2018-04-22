@@ -7,7 +7,6 @@ const Container = styled('div')`
   justify-content: center;
   height: 100vh;
   width: 100vw;
-  background-image: url("paper.gif");
 `
 
 export default class componentName extends Component {
