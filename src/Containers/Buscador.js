@@ -12,6 +12,7 @@ import SelectInput from '../Components/SelectInput';
 import DatePicker from '../Components/DatePicker'
 import Button from '../Components/Button'
 import AirportReducer, { AirportSelectors } from '../Redux/AirportRedux'
+import debounce from 'lodash/debounce'
 
 const options = [
   {'label': 'Germany', 'value': 'DE'},
@@ -24,25 +25,36 @@ const formName = 'buscador'
 class Buscador extends Component {
   searchFlights = () => {}
 
+  componentDidMount() {
+    this.props.airportRequest('from', 'belo')
+  }
+
+  handleSearch = debounce((field, terms = '') => {
+    if(terms.length > 2)
+      this.props.airportRequest(field, terms);
+  }, 500)
+
   render() {
-    const {handleSubmit} = this.props
+    const {handleSubmit, optionsFrom, optionsTo} = this.props
 
     return (
         <Card>
           <form onSubmit={handleSubmit(this.searchFlights)}>
             <Row responsive>
               <Field
+                handleSearch={(terms) => this.handleSearch('from', terms)}
                 autoFocus
                 label="Sair de"
                 name="from"
-                options={options}
+                options={optionsFrom}
                 children={<SelectInput/>}
                 component={FormField} />
               <Field 
+                handleSearch={(terms) => this.handleSearch('to', terms)}
                 autoFocus
                 label="Ir para"
                 name="to"
-                options={options}
+                options={optionsTo}
                 children={<SelectInput/>}
                 component={FormField} />
             </Row>
@@ -81,8 +93,8 @@ class Buscador extends Component {
 const mapStateToProps = (state, ownProps) => {
   return  {
     submitting: state.waiting,
-    from: SearchSelectors.selectFrom(state),
-    to: SearchSelectors.selectTo(state),
+    optionsFrom: state.airports.from.map(({iata, city, name}) => { return {value: iata, label: `${name} - ${city}`} }),
+    optionsTo: state.airports.to.map(({iata, city, name}) => { return {value: iata, label: `${name} - ${city}`} }),
   }
 }
 

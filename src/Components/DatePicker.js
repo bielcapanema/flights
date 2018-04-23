@@ -15,8 +15,8 @@ export default ({input}) => {
   return(
     <DatePicker
       className={datePickerClass}
-      selected={input.value}
-      value={input.value}
+      selected={moment()}
+      value={input.value.toString()}
       onChange={(value) => input.onChange(value)}
       minDate={moment()}
       maxDate={moment().add(1, "year")}

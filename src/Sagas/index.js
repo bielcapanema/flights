@@ -1,9 +1,9 @@
-import fetchSaga from './fetchSaga';
-import {all} from 'redux-saga/effects'
+import airportSaga from './airportSaga';
+import {all, takeLatest} from 'redux-saga/effects'
+import {AirportTypes} from '../Redux/AirportRedux'
 
-export default (restClient) => function* rootSaga() {
+export default function * root () {
     yield all([
-        fetchSaga(restClient)(),
-    ]);
-};
-
+        takeLatest(AirportTypes.AIRPORT_REQUEST, airportSaga)
+    ])
+  }

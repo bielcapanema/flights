@@ -6,7 +6,7 @@ import Immutable from 'seamless-immutable'
 const { Types, Creators } = createActions({
   airportRequest: ['field', 'terms'],
   airportSuccess: ['field', 'result'],
-  airportFailure: null
+  airportFailure: ['field']
 })
 
 export const AirportTypes = Types
@@ -15,34 +15,34 @@ export default Creators
 /* ------------- Initial State ------------- */
 
 export const INITIAL_STATE = Immutable({
-  to: {},
-  from: {},
+  to: [],
+  from: [],
   fetching: null
 })
 
 /* ------------- Selectors ------------- */
 
-export const SearchSelectors = {
-  selectFrom: state => state.airports.from,
-  selectTo: state => state.airports.to
+export const AirportSelectors = {
+  selectFrom: state => state.airports.from.map(({iata, city, name}) => { return {value: iata, label: `${name} - ${city}`} }),
+  selectTo: state => state.airports.to.map(({iata, city, name}) => { return {value: iata, label: `${name} - ${city}`} })
 }
 
 /* ------------- Reducers ------------- */
 
 // request the airports
 export const request = (state, { field, terms }) =>
-  state.merge({ fetching: true, field, terms, [field]: {} })
+  state.merge({ fetching: true, [field]: [] })
 
 // successful search airport
 export const success = (state, action) => {
-  const { results, field } = action
-  return state.merge({ fetching: false, [field]: results })
+  const { result, field } = action
+  return state.merge({ fetching: false, [field]: result })
 }
 
 // failed to get the airports
 export const failure = (state, action) =>{
   const { field } = action
-  return state.merge({ fetching: false, [field]: {} })
+  return state.merge({ fetching: false, [field]: [] })
 }
 /* ------------- Hookup Reducers To Types ------------- */
 
