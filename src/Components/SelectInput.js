@@ -8,13 +8,14 @@ const selectClass = css`
 `
 
 export default class SelectInput extends React.Component {
-  componentDidMount() {
-    this.props.handleSearch('sao')
-  }
+
   render() {
-    const {input, options, handleSearch} = this.props
+    const {input, options, handleSearch, placeholder, noResultsText} = this.props
+
     return (
       <Select
+        noResultsText={noResultsText}
+        placeholder={placeholder}
         className={selectClass}
         value={input.value}
         onInputChange={(input) => handleSearch(input)}

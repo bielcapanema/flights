@@ -7,6 +7,7 @@ export default combineReducers({
   routing: routerReducer,
   form: formReducer,
   airports: require('./AirportRedux').reducer,
+  flights: require('./FlightRedux').reducer
   // saving: savingRedux,
   // waiting: waitingReducer,
   // alert: alertReducer,

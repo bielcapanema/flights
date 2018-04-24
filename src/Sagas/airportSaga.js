@@ -1,12 +1,6 @@
 import { put } from 'redux-saga/effects';
-import AirportReducer, {AirportTypes} from '../Redux/AirportRedux'
+import AirportReducer from '../Redux/AirportRedux'
 import axios from 'axios'
-
-const headers = {
-  'Access-Control-Allow-Origin': '*',
-  "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept, Authorization",
-  "Access-Control-Allow-Methods": "GET,HEAD,OPTIONS,POST,PUT"
-}
 
 export default function* handleAirports({ terms, type, field }) {
   try {

@@ -22,7 +22,7 @@ export const saga = function* appSaga() {
 const sagaMiddleware = createSagaMiddleware();
 
 const config = {
-  key: 'dev3',
+  key: 'dev4',
   version: 2,
   storage: storage,
   blacklist: ['form'],

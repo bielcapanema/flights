@@ -12,7 +12,9 @@ import SelectInput from '../Components/SelectInput';
 import DatePicker from '../Components/DatePicker'
 import Button from '../Components/Button'
 import AirportReducer, { AirportSelectors } from '../Redux/AirportRedux'
+import FlightReducer from '../Redux/FlightRedux'
 import debounce from 'lodash/debounce'
+import { push as pushAction } from 'react-router-redux';
 
 const options = [
   {'label': 'Germany', 'value': 'DE'},
@@ -23,9 +25,25 @@ const options = [
 const formName = 'buscador'
 
 class Buscador extends Component {
-  searchFlights = () => {}
-
+  searchFlights = () => {
+    const postData = {
+      tripType: "RT", 
+      from: "REC",  //origem
+      to: "RIO",  //destino
+      outboundDate: "2018-12-22", //data de partida
+      inboundDate: "2018-12-28", //data de volta
+      cabin: "EC", //classe econômica (EC) ou executiva (EX)
+      adults: 2, //adultos
+      children: 1, //crianças
+      infants: 0 //bebês
+    } 
+  
+    this.props.flightsRequest(postData)
+    this.props.push('/resultados')
+  }
+  
   componentDidMount() {
+    this.props.airportRequest('to', 'belo')
     this.props.airportRequest('from', 'belo')
   }
 
@@ -43,15 +61,17 @@ class Buscador extends Component {
             <Row responsive>
               <Field
                 handleSearch={(terms) => this.handleSearch('from', terms)}
-                autoFocus
                 label="Sair de"
                 name="from"
+                placeholder="CIDADE OU AEROPORTO DE ORIGEM"
+                noResultsText="Nenhum aeroporto ou cidade encontrado."
                 options={optionsFrom}
                 children={<SelectInput/>}
                 component={FormField} />
               <Field 
                 handleSearch={(terms) => this.handleSearch('to', terms)}
-                autoFocus
+                placeholder="CIDADE OU AEROPORTO DE DESTINO"
+                noResultsText="Nenhum aeroporto ou cidade encontrado."
                 label="Ir para"
                 name="to"
                 options={optionsTo}
@@ -81,7 +101,9 @@ class Buscador extends Component {
                   name="title"
                   component={FormField}
                   id="title"/>
-                <Button>Pesquisar passagem</Button> 
+                <Button type="submit">
+                  <i class="icon-search"/> Pesquisar passagem
+                </Button> 
               </Row> 
             </Row>
           </form>
@@ -100,7 +122,9 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    airportRequest: (field, terms) => dispatch(AirportReducer.airportRequest(field, terms))
+    airportRequest: (field, terms) => dispatch(AirportReducer.airportRequest(field, terms)),
+    flightsRequest: (postData) => dispatch(FlightReducer.flightsRequest(postData)),
+    push: (...params) => dispatch(pushAction(...params))
   }
 }
 

@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import styled from 'react-emotion'
+import Logo from '../Components/Logo'
 
 const Container = styled('div')`
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   height: 100vh;
@@ -13,6 +15,7 @@ export default class componentName extends Component {
   render() {
     return (
       <Container>
+        <Logo />
         {this.props.children}
       </Container>
     )
