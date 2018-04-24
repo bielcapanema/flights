@@ -8,6 +8,7 @@ import {
 import Loader from 'react-loaders'
 import 'loaders.css'
 import FlightReducer, { FlightSelectors } from '../Redux/FlightRedux';
+import FlightsTable from '../Components/FlightsTable'
 
 class Resultados extends Component {
   render() {
@@ -19,8 +20,7 @@ class Resultados extends Component {
             {fetching && [<Loader type="ball-pulse" color="#2b82b2" />, 'carregando mais resultados...']}
             Total de voos encontrados: {totalFlights}
           </Row>
-          <Row minWidth="100%"></Row>
-          <Row minWidth="100%"></Row> 
+          <FlightsTable />
         </Card>
     )
   }
