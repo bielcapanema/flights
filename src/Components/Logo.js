@@ -1,6 +1,6 @@
-import React from 'react'
+import React from 'react';
 import styled from 'react-emotion';
-import {Link} from 'react-router-dom'
+import {Link} from 'react-router-dom';
 
 const Logo = styled('div')`
   display: block;
@@ -14,7 +14,7 @@ const Logo = styled('div')`
   position: relative;
   color: #fff;
   margin-bottom: 24px;
-`
+`;
 
 
 export default () => {

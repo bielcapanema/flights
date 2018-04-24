@@ -1,5 +1,5 @@
-import React from 'react'
-import styled from 'react-emotion'
+import React from 'react';
+import styled from 'react-emotion';
 
 export const Row = styled('div')`
   display: flex;
@@ -11,4 +11,4 @@ export const Row = styled('div')`
   ${props => props.responsive && `@media (max-width: 720px) {
     flex-direction: column;
   }` || ''}
-`
+`;

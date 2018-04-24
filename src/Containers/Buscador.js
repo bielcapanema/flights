@@ -9,11 +9,11 @@ import {
   Row
 }  from '../Components/Organization';
 import SelectInput from '../Components/SelectInput';
-import DatePicker from '../Components/DatePicker'
-import Button from '../Components/Button'
-import AirportReducer, { AirportSelectors } from '../Redux/AirportRedux'
-import FlightReducer from '../Redux/FlightRedux'
-import debounce from 'lodash/debounce'
+import DatePicker from '../Components/DatePicker';
+import Button from '../Components/Button';
+import AirportReducer, { AirportSelectors } from '../Redux/AirportRedux';
+import FlightReducer from '../Redux/FlightRedux';
+import debounce from 'lodash/debounce';
 import { push as pushAction } from 'react-router-redux';
 
 const options = [
@@ -22,7 +22,7 @@ const options = [
   {'label': 'United States', 'value': 'US'}
 ];
 
-const formName = 'buscador'
+const formName = 'buscador';
 
 class Buscador extends Component {
   searchFlights = () => {
@@ -146,4 +146,4 @@ const enhance = compose(
   connect(mapStateToProps, mapDispatchToProps),
 );
 
-export default enhance(Buscador)
+export default enhance(Buscador);

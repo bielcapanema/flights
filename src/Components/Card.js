@@ -1,7 +1,10 @@
-import React, { Component } from 'react'
-import styled from 'react-emotion'
+import React, {
+  Component
+} from 'react';
+import styled from 'react-emotion';
 
-const Card = styled('div')`
+const Card = styled('div')
+`
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -18,4 +21,4 @@ const Card = styled('div')`
   max-width: 700px;
 `
 
-export default Card
+export default Card;

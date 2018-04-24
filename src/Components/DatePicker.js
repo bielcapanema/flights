@@ -4,12 +4,12 @@ import moment from 'moment'
 import styled from 'react-emotion'
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import { css } from 'emotion'
+import { css } from 'emotion';
 
 const datePickerClass = css`
   flex: 1;
   height: 50px;
-`
+`;
 
 export default ({input}) => {
   return(

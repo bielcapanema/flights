@@ -7,7 +7,7 @@ import {
 }  from '../Components/Organization';
 import Loader from 'react-loaders'
 import 'loaders.css'
-import FlightReducer, { FlightSelectors } from '../Redux/FlightRedux'
+import FlightReducer, { FlightSelectors } from '../Redux/FlightRedux';
 
 class Resultados extends Component {
   render() {
@@ -41,4 +41,4 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Resultados)
+export default connect(mapStateToProps, mapDispatchToProps)(Resultados);

@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import styled from 'react-emotion'
+import React, { Component } from 'react';
+import styled from 'react-emotion';
 
 const Container = styled('div')`
   display: flex;
@@ -8,19 +8,19 @@ const Container = styled('div')`
   padding: 8px;
   width: 100%;
   min-width: ${props => props.minWidth ? props.minWidth : 'auto' };
-`
+`;
 const InputWrapper = styled('div')`
   display: flex;
   flex: 1;
   flex-direction: column;
   padding: 8px 0px;
-`
+`;
 
 const Input = styled('input')`
   width: 100%;
   height: 50px;
   padding: 8px 0px;
-`
+`;
 
 const FormField = (props) => {
   const {
@@ -43,4 +43,4 @@ const FormField = (props) => {
   )
 }
 
-export default FormField
+export default FormField;

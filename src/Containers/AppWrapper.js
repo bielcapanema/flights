@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
-import styled from 'react-emotion'
-import Logo from '../Components/Logo'
+import React, { Component } from 'react';
+import styled from 'react-emotion';
+import Logo from '../Components/Logo';
 
 const Container = styled('div')`
   display: flex;
@@ -9,7 +9,7 @@ const Container = styled('div')`
   justify-content: center;
   height: 100vh;
   width: 100vw;
-`
+`;
 
 export default class componentName extends Component {
   render() {

@@ -1,5 +1,5 @@
-import { createReducer, createActions } from 'reduxsauce'
-import Immutable from 'seamless-immutable'
+import { createReducer, createActions } from 'reduxsauce';
+import Immutable from 'seamless-immutable';
 
 /* ------------- Types and Action Creators ------------- */
 
@@ -9,8 +9,8 @@ const { Types, Creators } = createActions({
   airportFailure: ['field']
 })
 
-export const AirportTypes = Types
-export default Creators
+export const AirportTypes = Types;
+export default Creators;
 
 /* ------------- Initial State ------------- */
 

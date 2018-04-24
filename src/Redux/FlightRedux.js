@@ -1,6 +1,6 @@
-import { createReducer, createActions } from 'reduxsauce'
-import Immutable from 'seamless-immutable'
-import map from 'lodash/map'
+import { createReducer, createActions } from 'reduxsauce';
+import Immutable from 'seamless-immutable';
+import map from 'lodash/map';
 /* ------------- Types and Action Creators ------------- */
 
 const { Types, Creators } = createActions({
@@ -10,8 +10,8 @@ const { Types, Creators } = createActions({
   flightsFailure: []
 })
 
-export const FlightTypes = Types
-export default Creators
+export const FlightTypes = Types;
+export default Creators;
 
 /* ------------- Initial State ------------- */
 

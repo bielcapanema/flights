@@ -1,23 +1,22 @@
-import { applyMiddleware, createStore } from 'redux'
+import { applyMiddleware, createStore } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
-import { persistReducer, persistStore } from 'redux-persist'
-import storage from 'redux-persist/lib/storage'
+import { persistReducer, persistStore } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 import reducer from './RootReducer';
 import { routerMiddleware } from 'react-router-redux';
 import createSagaMiddleware from 'redux-saga';
 import {all} from 'redux-saga/effects'
 import rootSaga from '../Sagas';
-import restClient from '../Services/rest_client'
-import createHistory from 'history/createBrowserHistory'
-import immutablePersistenceTransform from '../Services/ImmutablePersistenceTransform'
+import createHistory from 'history/createBrowserHistory';
+import immutablePersistenceTransform from '../Services/ImmutablePersistenceTransform';
 
-export const history = createHistory()
+export const history = createHistory();
 
-const reduxRouterMiddleware = routerMiddleware(history)
+const reduxRouterMiddleware = routerMiddleware(history);
 
 
 export const saga = function* appSaga() {
-  yield all([rootSaga(restClient)])
+  yield all([rootSaga()])
 };
 const sagaMiddleware = createSagaMiddleware();
 

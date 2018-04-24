@@ -1,10 +1,10 @@
 import { put, all, call } from 'redux-saga/effects';
-import FlightReducer from '../Redux/FlightRedux'
-import axios from 'axios'
+import FlightReducer from '../Redux/FlightRedux';
+import axios from 'axios';
 
-const SEARCH_FLIGHTS_API = 'https://flight-price-hmg.maxmilhas.com.br'
+const SEARCH_FLIGHTS_API = 'https://flight-price-hmg.maxmilhas.com.br';
 
-const AUTH_TOKEN = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJtYXhtaWxoYXMuY29tLmJyIiwiaWF0IjoxNTA5MTIwMTAxLCJleHAiOjE1MTA0MTYxMDEsImF1ZCI6InRlc3RlLWZyb250ZW5kIiwic3ViIjoidGVzdGUtZnJvbnRlbmQiLCJlbnYiOiJobWcifQ.nM6wMem6dxF0CcDlig5iA9az5ZfmbXDjq1e4ypZXwjU'
+const AUTH_TOKEN = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJtYXhtaWxoYXMuY29tLmJyIiwiaWF0IjoxNTA5MTIwMTAxLCJleHAiOjE1MTA0MTYxMDEsImF1ZCI6InRlc3RlLWZyb250ZW5kIiwic3ViIjoidGVzdGUtZnJvbnRlbmQiLCJlbnYiOiJobWcifQ.nM6wMem6dxF0CcDlig5iA9az5ZfmbXDjq1e4ypZXwjU';
 
 function* getAirlineFlights(airline, searchId) {
   const flights = yield axios.get(`${SEARCH_FLIGHTS_API }/search/${searchId}/flights?airline=${airline.label}`, {headers: { Authorization: `Bearer ${AUTH_TOKEN}` }})
