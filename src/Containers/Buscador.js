@@ -30,8 +30,8 @@ class Buscador extends Component {
   searchFlights = (data) => {
     const postData = {
       tripType: data.inboundDate ? "RT" : "OW", 
-      from: data.from.value,  //origem
-      to: data.to.value,  //destino
+      from: data.from && data.from.value,  //origem
+      to: data.from ? data.to.value : undefined,  //destino
       outboundDate: data.outboundDate ? data.outboundDate.format("YYYY-MM-DD"): undefined, //data de partida
       inboundDate: data.inboundDate ? data.inboundDate.format("YYYY-MM-DD"): undefined, //data de volta
       cabin: data.cabin, //classe econômica (EC) ou executiva (EX)
@@ -150,19 +150,24 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   }
 }
 
-
 const enhance = compose(
   connect(mapStateToProps, mapDispatchToProps),
   reduxForm({
     form: formName,
     validate: (values, props) => {
         const errors = {};
-        // if (!values.title) {
-        //     errors.title = 'Dê um título ao seu post.';
-        // }
-        // if(!values.text) {
-        //     errors.text = 'Seu post deve ter algum conteúdo.';
-        // }
+        if (!values.from) {
+            errors.from = 'Campo necessário.';
+        }
+        if (!values.to) {
+          errors.to = 'Campo necessário.';
+        }
+        if(!values.outboundDate) {
+            errors.outboundDate = 'Campo necessário.';
+        }
+        if(!values.adults) {
+          errors.adults = 'Campo necessário.';
+        }
         return errors;
     }
   }),
