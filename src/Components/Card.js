@@ -1,6 +1,3 @@
-import React, {
-  Component
-} from 'react';
 import styled from 'react-emotion';
 
 const Card = styled('div')

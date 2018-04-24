@@ -1,29 +1,22 @@
 import React, { Component } from 'react';
 import Card from '../Components/Card';
-import { reduxForm, Field, change, SubmissionError } from 'redux-form';
+import { reduxForm, Field } from 'redux-form';
 import compose from 'recompose/compose';
 import {connect} from 'react-redux';
 import FormField from '../Components/FormField';
-import styled from 'react-emotion';
 import {
   Row
 }  from '../Components/Organization';
 import SelectInput from '../Components/SelectInput';
 import DatePicker from '../Components/DatePicker';
 import Button from '../Components/Button';
-import AirportReducer, { AirportSelectors } from '../Redux/AirportRedux';
+import AirportReducer from '../Redux/AirportRedux';
 import FlightReducer from '../Redux/FlightRedux';
 import debounce from 'lodash/debounce';
 import { push as pushAction } from 'react-router-redux';
 import SelectFlightClass from '../Components/SelectFlightClass'
 import MoreLessInput from '../Components/MoreLessInput'
 import moment from 'moment'
-
-const options = [
-  {'label': 'Germany', 'value': 'DE'},
-  {'label': 'Russian Federation', 'value': 'RU'},
-  {'label': 'United States', 'value': 'US'}
-];
 
 const formName = 'buscador';
 
@@ -87,12 +80,14 @@ class Buscador extends Component {
                   autoFocus
                   label="Data da ida"
                   name="outboundDate"
+                  placeholder="DD/MM/YYYY"
                   children={<DatePicker/>}
                   component={FormField} />
                 <Field 
                   autoFocus
                   label="Data da volta"
                   name="inboundDate"
+                  placeholder="OPICIONAL"
                   children={<DatePicker/>}
                   component={FormField} />
               </Row>

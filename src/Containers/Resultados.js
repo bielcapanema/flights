@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import Card from '../Components/Card';
 import {connect} from 'react-redux';
-import styled from 'react-emotion';
 import {
   Row
 }  from '../Components/Organization';
 import Loader from 'react-loaders'
 import 'loaders.css'
-import FlightReducer, { FlightSelectors } from '../Redux/FlightRedux';
+import { FlightSelectors } from '../Redux/FlightRedux';
 import FlightsTable from '../Components/FlightsTable'
 import map from 'lodash/map'
 
@@ -61,7 +60,7 @@ class Resultados extends Component {
     const {fetching, totalFlights} = this.props
     return (
         <Card minWidth="80%">
-          <Row minWidth="100%" >
+          <Row minWidth="100%" center margin>
             {fetching && <div> <Loader type="ball-pulse" color="#2b82b2" /> carregando mais resultados...</div>}
           </Row>
           <Row minWidth="100%" >

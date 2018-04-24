@@ -3,7 +3,7 @@ import {RadioGroup, RadioButton} from 'react-radio-buttons'
 
 export default class SelectFlightClass extends Component {
   render() {
-    const {input, options, handleSearch, placeholder, noResultsText} = this.props
+    const {input} = this.props
     return (
       <RadioGroup value={input.value} onChange={ input.onChange } horizontal>
         <RadioButton value="EC">
