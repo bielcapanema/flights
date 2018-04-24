@@ -17,6 +17,7 @@ import debounce from 'lodash/debounce';
 import { push as pushAction } from 'react-router-redux';
 import SelectFlightClass from '../Components/SelectFlightClass'
 import MoreLessInput from '../Components/MoreLessInput'
+import moment from 'moment'
 
 const options = [
   {'label': 'Germany', 'value': 'DE'},
@@ -35,9 +36,9 @@ class Buscador extends Component {
       outboundDate: data.outboundDate ? data.outboundDate.format("YYYY-MM-DD"): undefined, //data de partida
       inboundDate: data.inboundDate ? data.inboundDate.format("YYYY-MM-DD"): undefined, //data de volta
       cabin: data.cabin, //classe econômica (EC) ou executiva (EX)
-      adults: data.adults, //adultos
-      children: data.children, //crianças
-      infants: data.infants //bebês
+      adults: parseInt(data.adults, 10), //adultos
+      children: parseInt(data.children, 10), //crianças
+      infants: parseInt(data.infants, 10) //bebês
     } 
     this.props.flightsRequest(postData)
     this.props.push('/resultados')
@@ -95,15 +96,16 @@ class Buscador extends Component {
                   children={<DatePicker/>}
                   component={FormField} />
               </Row>
-              <Row responsive>
+              <Row responsive column>
                 <Field 
                   autoFocus
                   label="Classe do voo"
                   name="cabin"
                   children={<SelectFlightClass />}
                   component={FormField} />
-                <Row responsive>  
+                <Row minWidth="200px">  
                   <Field 
+                    maxValue={10}
                     autoFocus
                     label="Adultos"
                     name="adults"
@@ -146,7 +148,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     airportRequest: (field, terms) => dispatch(AirportReducer.airportRequest(field, terms)),
     flightsRequest: (postData) => dispatch(FlightReducer.flightsRequest(postData)),
     push: (...params) => dispatch(pushAction(...params)),
-    initialValues: {cabin: "EC", adults: 1}
+    initialValues: {cabin: "EC", adults: 1, infants: 0, children: 0, outboundDate: moment()}
   }
 }
 
@@ -162,11 +164,17 @@ const enhance = compose(
         if (!values.to) {
           errors.to = 'Campo necessário.';
         }
+        if (values.from === values.to) {
+          errors.to = 'O destino deve ser diferente da origem!';
+        }
         if(!values.outboundDate) {
             errors.outboundDate = 'Campo necessário.';
         }
-        if(!values.adults) {
-          errors.adults = 'Campo necessário.';
+        if(!values.adults || values.adults === '0') {
+          errors.adults = 'Quantidade de adultos deve ser maior que 0.';
+        }
+        if(values.infants + values.children > values.adults) {
+          errors.adults = 'Quantidade de adultos deve ser maior ou igual a quantidade de crianças e bebês.';
         }
         return errors;
     }

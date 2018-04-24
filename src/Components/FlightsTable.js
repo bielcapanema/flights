@@ -5,7 +5,7 @@ import "react-table/react-table.css";
 export default class FlightsTable extends React.Component {
   render() {
     const { data } = this.props;
-    console.log(data)
+
     return (
       <ReactTable
         style={{width: '100%'}}
@@ -23,7 +23,7 @@ export default class FlightsTable extends React.Component {
                 accessor: "departureDate"
               },
               {
-                Header: "Tipo",
+                Header: "Paradas",
                 accessor: "tipo"
               },
               {

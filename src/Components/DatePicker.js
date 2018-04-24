@@ -11,11 +11,13 @@ const datePickerClass = css`
   height: 50px;
 `;
 
-export default ({input}) => {
+export default ({input, dafaultDate}) => {
   return(
     <DatePicker
+      dateFormat="YYYY/MM/DD"
+      showTimeSelect={false}
       className={datePickerClass}
-      value={input.value.toString()}
+      selected={typeof input.value === 'object' ? input.value : dafaultDate}
       onChange={(value) => input.onChange(value)}
       minDate={moment()}
       maxDate={moment().add(1, "year")}

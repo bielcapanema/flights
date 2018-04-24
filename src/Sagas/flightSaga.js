@@ -1,6 +1,7 @@
 import { put, all, call } from 'redux-saga/effects';
 import FlightReducer from '../Redux/FlightRedux';
 import axios from 'axios';
+import {toastr} from 'react-redux-toastr'
 
 const SEARCH_FLIGHTS_API = 'https://flight-price-hmg.maxmilhas.com.br';
 
@@ -21,7 +22,7 @@ export default function* handleFlights({ postData }) {
     }))
     yield put(FlightReducer.flightsSuccess())
   } catch (error) {
-    console.log(error)
+    yield toastr.error('Erro', 'Erro ao pesquisar voos')
     yield put(FlightReducer.flightsFailure(error))
   }
 }
