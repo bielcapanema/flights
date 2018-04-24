@@ -14,6 +14,7 @@ const Logo = styled('div')`
   position: relative;
   color: #fff;
   margin-bottom: 24px;
+  margin-top: 24px;
 `;
 
 

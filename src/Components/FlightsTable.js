@@ -3,52 +3,62 @@ import ReactTable from "react-table";
 import "react-table/react-table.css";
 
 export default class FlightsTable extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      data: []
-    };
-  }
   render() {
-    const { data } = this.state;
+    const { data } = this.props;
+    console.log(data)
     return (
-      <div>
-        <ReactTable
-          data={data}
-          columns={[
-            {
-              Header: "Name",
-              columns: [
-                {
-                  Header: "First Name",
-                  accessor: "firstName"
-                },
-                {
-                  Header: "Last Name",
-                  accessor: "lastName"
-                }
-              ]
-            },
-            {
-              Header: "Info",
-              columns: [
-                {
-                  Header: "Age",
-                  accessor: "age"
-                }
-              ]
-            }
-          ]}
-          defaultSorted={[
-            {
-              id: "age",
-              desc: true
-            }
-          ]}
-          defaultPageSize={10}
-          className="-striped -highlight"
-        />
-      </div>
+      <ReactTable
+        style={{width: '100%'}}
+        data={data}
+        columns={[
+          {
+            Header: "Dados do voo",
+            columns: [
+              {
+                Header: "Companhia",
+                accessor: "airline"
+              },
+              {
+                Header: "Partida",
+                accessor: "departureDate"
+              },
+              {
+                Header: "Tipo",
+                accessor: "tipo"
+              },
+              {
+                Header: "Chegada",
+                accessor: "arrivalDate"
+              }
+            ]
+          },
+          {
+            Header: "Preço",
+            columns: [
+              {
+                Header: "Companhia aérea",
+                accessor: "airlinePrice"
+              },
+              {
+                Header: "MAXMILHAS",
+                accessor: "milesPrice"
+              },
+              {
+                Header: "DESCONTO",
+                accessor: "desconto"
+              }
+            ]
+          }
+        ]}
+        defaultSorted={[
+          {
+            id: "age",
+            desc: true
+          }
+        ]}
+        defaultPageSize={10}
+        className="-striped -highlight"
+      />
     );
   }
 }
