@@ -15,7 +15,6 @@ export default ({input}) => {
   return(
     <DatePicker
       className={datePickerClass}
-      selected={moment()}
       value={input.value.toString()}
       onChange={(value) => input.onChange(value)}
       minDate={moment()}

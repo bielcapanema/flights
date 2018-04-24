@@ -15,6 +15,8 @@ import AirportReducer, { AirportSelectors } from '../Redux/AirportRedux';
 import FlightReducer from '../Redux/FlightRedux';
 import debounce from 'lodash/debounce';
 import { push as pushAction } from 'react-router-redux';
+import SelectFlightClass from '../Components/SelectFlightClass'
+import MoreLessInput from '../Components/MoreLessInput'
 
 const options = [
   {'label': 'Germany', 'value': 'DE'},
@@ -25,19 +27,18 @@ const options = [
 const formName = 'buscador';
 
 class Buscador extends Component {
-  searchFlights = () => {
+  searchFlights = (data) => {
     const postData = {
-      tripType: "RT", 
-      from: "REC",  //origem
-      to: "RIO",  //destino
-      outboundDate: "2018-12-22", //data de partida
-      inboundDate: "2018-12-28", //data de volta
-      cabin: "EC", //classe econômica (EC) ou executiva (EX)
-      adults: 2, //adultos
-      children: 1, //crianças
-      infants: 0 //bebês
+      tripType: data.inboundDate ? "RT" : "OW", 
+      from: data.from.value,  //origem
+      to: data.to.value,  //destino
+      outboundDate: data.outboundDate ? data.outboundDate.format("YYYY-MM-DD"): undefined, //data de partida
+      inboundDate: data.inboundDate ? data.inboundDate.format("YYYY-MM-DD"): undefined, //data de volta
+      cabin: data.cabin, //classe econômica (EC) ou executiva (EX)
+      adults: data.adults, //adultos
+      children: data.children, //crianças
+      infants: data.infants //bebês
     } 
-  
     this.props.flightsRequest(postData)
     this.props.push('/resultados')
   }
@@ -97,15 +98,35 @@ class Buscador extends Component {
               <Row responsive>
                 <Field 
                   autoFocus
-                  label="Passageiros e classe do voo"
-                  name="title"
-                  component={FormField}
-                  id="title"/>
-                <Button type="submit">
-                  <i class="icon-search"/> Pesquisar passagem
-                </Button> 
+                  label="Classe do voo"
+                  name="cabin"
+                  children={<SelectFlightClass />}
+                  component={FormField} />
+                <Row responsive>  
+                  <Field 
+                    autoFocus
+                    label="Adultos"
+                    name="adults"
+                    children={<MoreLessInput />}
+                    component={FormField} />  
+                  <Field 
+                    autoFocus
+                    label="Crianças"
+                    name="children"
+                    children={<MoreLessInput />}
+                    component={FormField} /> 
+                  <Field 
+                    autoFocus
+                    label="Bebês"
+                    name="infants"
+                    children={<MoreLessInput />}
+                    component={FormField} />       
+                </Row>
               </Row> 
             </Row>
+            <Button type="submit">
+              <i className="icon-search"/> Pesquisar passagem
+            </Button> 
           </form>
         </Card>
     )
@@ -124,12 +145,14 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     airportRequest: (field, terms) => dispatch(AirportReducer.airportRequest(field, terms)),
     flightsRequest: (postData) => dispatch(FlightReducer.flightsRequest(postData)),
-    push: (...params) => dispatch(pushAction(...params))
+    push: (...params) => dispatch(pushAction(...params)),
+    initialValues: {cabin: "EC", adults: 1}
   }
 }
 
 
 const enhance = compose(
+  connect(mapStateToProps, mapDispatchToProps),
   reduxForm({
     form: formName,
     validate: (values, props) => {
@@ -143,7 +166,6 @@ const enhance = compose(
         return errors;
     }
   }),
-  connect(mapStateToProps, mapDispatchToProps),
 );
 
 export default enhance(Buscador);
